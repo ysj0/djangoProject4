@@ -21,9 +21,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # reading .env file
-environ.Env.read_env(
-    env_file=os.path.join(BASE_DIR, '.env')
-)
+env_list = dict()
+local_env = open(os.path.join(BASE_DIR, '.env'))
+
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
+
+
+while True:
+    line = local_env.readline()
+    if not line:
+        break
+    line = line.replace('\n', '')
+    start = line.fine('=')
+    key = line[:start]
+    value = line[start+1:]
+    env_list[key] = value
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
